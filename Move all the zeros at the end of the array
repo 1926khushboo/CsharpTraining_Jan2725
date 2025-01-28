@@ -1,0 +1,41 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Input array size
+        Console.Write("Enter the number of elements: ");
+        int n = int.Parse(Console.ReadLine());
+
+        // Input the array
+        int[] arr = new int[n];
+        Console.WriteLine("Enter the elements of the array:");
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write($"Element - {i}: ");
+            arr[i] = int.Parse(Console.ReadLine());
+        }
+
+        // Move zeros to the end
+        int index = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if (arr[i] != 0)
+            {
+                arr[index++] = arr[i];
+            }
+        }
+
+        // Fill remaining positions with zeros
+        while (index < n)
+        {
+            arr[index++] = 0;
+        }
+
+        // Output the result
+        Console.WriteLine("Array after moving zeros to the end: " + string.Join(" ", arr));
+    }
+}
+
+            
