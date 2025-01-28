@@ -1,0 +1,53 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Ask the user for the number of elements
+        Console.Write("Enter the number of elements: ");
+        int n = int.Parse(Console.ReadLine());
+
+        // Create arrays for input, even, and odd numbers
+        int[] numbers = new int[n];
+        int[] evens = new int[n];
+        int[] odds = new int[n];
+        int evenCount = 0, oddCount = 0;
+
+        // Get numbers from the user
+        Console.WriteLine("Enter the numbers:");
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write($"Element - {i}: ");
+            numbers[i] = int.Parse(Console.ReadLine());
+
+            // Check if the number is even or odd
+            if (numbers[i] % 2 == 0)
+            {
+                evens[evenCount] = numbers[i];
+                evenCount++;
+            }
+            else
+            {
+                odds[oddCount] = numbers[i];
+                oddCount++;
+            }
+        }
+
+        // Display even numbers
+        Console.WriteLine("The Even numbers are:");
+        for (int i = 0; i < evenCount; i++)
+        {
+            Console.Write(evens[i] + " ");
+        }
+        Console.WriteLine();
+
+        // Display odd numbers
+        Console.WriteLine("The Odd numbers are:");
+        for (int i = 0; i < oddCount; i++)
+        {
+            Console.Write(odds[i] + " ");
+        }
+        Console.WriteLine();
+    }
+}
