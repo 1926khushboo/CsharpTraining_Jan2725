@@ -1,0 +1,45 @@
+Create a C# program that implements an abstract class Animal that has a new property of type text and three methods SetName (string name),GetName and Eat.The Eat method will 
+be an abstract method of the void. You will also need to create a Dog class that implements the above Animal class and the Eat method that says the dog is Eating.To test the 
+program ask the user for a doh name and create a new Dog type object from the Main of the program,give the Dog object a name,and then execute the GetName and Eat methods.
+
+using System; // Required namespace for input/output operations
+
+// Step 1: Define an abstract class Animal
+abstract class Animal
+{
+    protected string name; // Protected variable to store the animal's name
+
+    // Step 2: Method to set the name of the animal
+    public void SetName(string name) => this.name = name;
+
+    // Step 3: Method to get the name of the animal
+    public string GetName() => name;
+
+    // Step 4: Abstract method Eat (must be implemented by derived class)
+    public abstract void Eat();
+}
+
+// Step 5: Define a Dog class that inherits from Animal
+class Dog : Animal
+{
+    // Step 6: Implement the abstract method Eat
+    public override void Eat() => Console.WriteLine("The dog is eating.");
+}
+
+// Step 7: Define the main program class
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter the dog's name: "); // Step 8: Ask user for dog's name
+
+        Dog myDog = new Dog(); // Step 9: Create a Dog object
+        myDog.SetName(Console.ReadLine()); // Step 10: Set the dog's name from user input
+
+        Console.WriteLine("Dog's name: " + myDog.GetName()); // Step 11: Display dog's name
+        myDog.Eat(); // Step 12: Call the Eat method
+    }
+}
+Output:Enter the dog's name: Max
+The dog's name is Max.
+Max is eating.
