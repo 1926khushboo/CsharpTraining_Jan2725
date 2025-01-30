@@ -1,0 +1,136 @@
+In this assignment, you will create a simple vehicle management system using C#.
+
+You will define a base class for vehicles and derived classes for specific types of vehicles, implementing inheritance and method overriding.
+
+Task:
+
+1. Define Vehicle Base Class:
+
+• Create a base class named Vehicle to represent general vehicles.
+
+• Add properties to the class: Make (string type), Model (string type), and Year (integer type).
+
+• Implement a constructor in the Vehicle class to initialize these properties.
+
+• Add a virtual method named GetInfo() to display the vehicle's details.
+2. Define Derived Classes:
+
+• Create a derived class named Car that inherits from Vehicle.
+
+• Create a derived class named Motorcycle that inherits from Vehicle.
+Override the GetInfo() method in both derived classes to include specific details (e.g., type of vehicle).
+
+3. Input Handling:
+
+• Use the Console.ReadLine() method to prompt the user to enter the make, model, and year of the vehicle.
+
+4. Create Instances and Display Information:
+
+• Instantiate the Car and Motorcycle classes using the input provided by the user for make, model, and year.
+• Call the GetInfo() method on each instance to display the vehicle's details.
+Complete the syntax of code as given situation.
+using System;
+
+Program:
+using System;
+
+public class Vehicle
+{
+    // Properties
+    public string Make { get; set; }
+    public string Model { get; set; }
+    public int Year { get; set; }
+
+    // Constructor
+    public Vehicle(string make, string model, int year)
+    {
+        Make = make;
+        Model = model;
+        Year = year;
+    }
+
+    // Virtual method to display vehicle details
+    public virtual void GetInfo()
+    {
+        Console.WriteLine($"{Year} {Make} {Model}");
+    }
+}
+
+public class Car : Vehicle
+{
+    // Constructor for Car class
+    public Car(string make, string model, int year) : base(make, model, year) { }
+
+    // Override GetInfo method
+    public override void GetInfo()
+    {
+        Console.WriteLine($"Car: {Year} {Make} {Model}");
+    }
+}
+
+public class Motorcycle : Vehicle
+{
+    // Constructor for Motorcycle class
+    public Motorcycle(string make, string model, int year) : base(make, model, year) { }
+
+    // Override GetInfo method
+    public override void GetInfo()
+    {
+        Console.WriteLine($"Motorcycle: {Year} {Make} {Model}");
+    }
+}
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        // Collect input for the car
+        Console.WriteLine("Enter car make:");
+        string carMake = Console.ReadLine();
+
+        Console.WriteLine("Enter car model:");
+        string carModel = Console.ReadLine();
+
+        Console.WriteLine("Enter car year:");
+        int carYear = int.Parse(Console.ReadLine());
+
+        // Create an instance of Car class
+        Car car = new Car(carMake, carModel, carYear);
+
+        // Collect input for the motorcycle
+        Console.WriteLine("Enter motorcycle make:");
+        string motorcycleMake = Console.ReadLine();
+
+        Console.WriteLine("Enter motorcycle model:");
+        string motorcycleModel = Console.ReadLine();
+
+        Console.WriteLine("Enter motorcycle year:");
+        int motorcycleYear = int.Parse(Console.ReadLine());
+
+        // Create an instance of Motorcycle class
+        Motorcycle motorcycle = new Motorcycle(motorcycleMake, motorcycleModel, motorcycleYear);
+
+        // Display the details
+        car.GetInfo();
+        motorcycle.GetInfo();
+    }
+}
+
+ProgramOutput:
+Enter car make:
+Toyota
+Enter car model:
+Camry
+Enter car year:
+2020
+Enter motorcycle make:
+Honda
+Enter motorcycle model:
+CBR600
+Enter motorcycle year:
+2019
+
+Car: 2020 Toyota Camry
+Motorcycle: 2019 Honda CBR600
+
+
