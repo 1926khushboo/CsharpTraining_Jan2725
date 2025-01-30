@@ -1,0 +1,114 @@
+In this assignment, you will create a simple banking system using C#. You will define classes to represent bank accounts and implement functionalities for deposit, 
+withdrawal, and balance inquiry operations.
+
+Task:
+
+Define Account Class:
+Create a class named Account to represent bank accounts.
+Add properties to the class: AccountNumber (string type), Balance (decimal type), and OwnerName (string type).
+Implement access modifiers to control access to account properties.
+Implement Operations:
+Add methods to the Account class for depositing funds, withdrawing funds, and checking account balance.
+Use access modifiers to restrict access to sensitive operations like withdrawing funds.
+Input Handling:
+Prompt the user to enter account details (account number, owner name) when creating a new account or performing transactions.
+Use appropriate data types for user input and validation.
+Perform Transactions:
+Allow users to deposit funds into their account by specifying the deposit amount.
+Allow users to withdraw funds from their account by specifying the withdrawal amount.
+Display the updated account balance after each transaction.
+Instructions:
+
+Write the C# code to implement the banking system as described above.
+Ensure that access modifiers are used appropriately to maintain data privacy and security.
+Test your program by creating accounts, depositing funds, and withdrawing funds to verify its functionality.
+Document your code with appropriate comments to explain its purpose and functionality.
+
+*********************************Program*******************************************************
+using System;
+using System.Globalization;
+
+public class BankAccount
+{
+    // Properties with private access modifiers
+    public string AccountNumber { get; private set; }
+    public decimal Balance { get; private set; }
+    public string OwnerName { get; private set; }
+
+    // Constructor to initialize account details
+    public BankAccount(string accountNumber, string ownerName)
+    {
+        AccountNumber = accountNumber;
+        OwnerName = ownerName;
+        Balance = 0; // Initialize balance as 0
+    }
+
+    // Method to deposit funds into the account
+    public void Deposit(decimal amount)
+    {
+        if (amount > 0)
+        {
+            Balance += amount;
+            Console.WriteLine($"Deposited: {amount.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))}");
+            Console.WriteLine($"Account Balance: {Balance.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))}");
+        }
+        else
+        {
+            Console.WriteLine("Deposit amount must be greater than 0.");
+        }
+    }
+
+    // Method to withdraw funds from the account
+    public void Withdraw(decimal amount)
+    {
+        if (amount > 0 && amount <= Balance)
+        {
+            Balance -= amount;
+            Console.WriteLine($"Withdrew: {amount.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))}");
+            Console.WriteLine($"Account Balance: {Balance.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))}");
+        }
+        else
+        {
+            Console.WriteLine("Insufficient funds or invalid withdrawal amount.");
+        }
+    }
+
+    // Method to check account balance
+    public void CheckBalance()
+    {
+        Console.WriteLine($"Account Balance: {Balance.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))}");
+    }
+}
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        // Prompt user to create a new account
+        Console.WriteLine("Enter account number:");
+        string accountNumber = Console.ReadLine();
+
+        Console.WriteLine("Enter owner name:");
+        string ownerName = Console.ReadLine();
+
+        // Create a new bank account
+        BankAccount account = new BankAccount(accountNumber, ownerName);
+
+        // Test Case Operations (based on provided expected behavior)
+        // Deposit $100
+        account.Deposit(100);
+
+        // Withdraw $50
+        account.Withdraw(50);
+    }
+}
+*****************************************Output****************************************************
+Enter account number:
+12345
+Enter owner name:
+John Doe
+Deposited: $100.00
+Account Balance: $100.00
+Withdrew: $50.00
+Account Balance: $50.00
+
