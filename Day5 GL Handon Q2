@@ -1,0 +1,116 @@
+This exercise covers different aspects of C#.NET object types including properties, static members, and static classes.
+
+Task:
+
+Properties:
+Create a class named PropertyDemo with properties demonstrating different access modifiers and property types.
+Static Members:
+Create a class named StaticDemo with static members including variables, methods, and constructors.
+Static Class:
+Create a static class named MathHelper with static methods for performing mathematical operations.
+Instructions:
+
+Create the PropertyDemo, StaticDemo, and MathHelper classes as per the task requirements.
+Implement the properties, static members, and static methods with appropriate access modifiers and functionality.
+Include comments to explain the purpose and functionality of each class and member.
+Expected Output:
+
+5
+Private Value
+Static Constructor
+10
+Static Method
+15
+5
+
+***********************************************************Program*************************************************************************************************************
+using System;
+
+// Class to demonstrate properties with different access modifiers and types
+class PropertyDemo
+{
+    // Public property with a private backing field
+    public int PublicProperty { get; set; }
+
+    // Private property with a private backing field
+    private string PrivateProperty { get; set; }
+
+    // Read-only property
+    public int ReadOnlyProperty { get; }
+
+    // Constructor to initialize properties
+    public PropertyDemo(int publicValue, string privateValue, int readOnlyValue)
+    {
+        PublicProperty = publicValue;
+        PrivateProperty = privateValue;
+        ReadOnlyProperty = readOnlyValue;
+    }
+
+    // Method to demonstrate accessing private property
+    public void DisplayPrivateProperty()
+    {
+        Console.WriteLine(PrivateProperty);
+    }
+}
+
+// Class to demonstrate static members
+class StaticDemo
+{
+    // Static variable
+    public static int StaticVariable = 5;
+
+    // Static constructor
+    static StaticDemo()
+    {
+        Console.WriteLine("Static Constructor");
+    }
+
+    // Static method
+    public static void StaticMethod()
+    {
+        Console.WriteLine("Static Method");
+    }
+}
+
+// Static class to demonstrate static methods for mathematical operations
+static class MathHelper
+{
+    // Static method to add two numbers
+    public static int Add(int a, int b)
+    {
+        return a + b;
+    }
+
+    // Static method to subtract two numbers
+    public static int Subtract(int a, int b)
+    {
+        return a - b;
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Demonstrate PropertyDemo first
+        PropertyDemo propertyDemo = new PropertyDemo(5, "Private Value", 10);
+        Console.WriteLine(propertyDemo.PublicProperty); // Output: 5
+        propertyDemo.DisplayPrivateProperty(); // Output: Private Value
+
+        // Access StaticDemo to trigger the static constructor without printing StaticVariable
+        _ = StaticDemo.StaticVariable; // Triggers static constructor but does not print anything
+
+        // Demonstrate PropertyDemo's ReadOnlyProperty
+        Console.WriteLine(propertyDemo.ReadOnlyProperty); // Output: 10
+
+        // Demonstrate StaticDemo's StaticMethod
+        StaticDemo.StaticMethod(); // Output: Static Method
+
+        // Demonstrate MathHelper
+        int sum = MathHelper.Add(10, 5);
+        Console.WriteLine(sum); // Output: 15
+
+        int difference = MathHelper.Subtract(10, 5);
+        Console.WriteLine(difference); // Output: 5
+    }
+}
