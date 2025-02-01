@@ -1,0 +1,51 @@
+Find duplicate characters in a string
+
+Example:
+Here, you can see we have passed "google" as a string, and we got a result as "og". It means these two characters (og)are duplicates in the word "google".
+********************************************Program*************************************************************
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+    public static void FindDuplicateCharacters(string input)
+    {
+        // Dictionary to store character counts
+        Dictionary<char, int> charCount = new Dictionary<char, int>();
+
+        // Convert the string to lowercase to make it case-insensitive
+        input = input.ToLower();
+
+        // Iterate through each character in the string
+        foreach (char c in input)
+        {
+            // If the character is already in the dictionary, increment its count
+            if (charCount.ContainsKey(c))
+            {
+                charCount[c]++;
+            }
+            // Otherwise, add it to the dictionary with a count of 1
+            else
+            {
+                charCount[c] = 1;
+            }
+        }
+
+        // Print characters that have a count greater than 1 (duplicates)
+        Console.Write("Duplicate characters: ");
+        foreach (var pair in charCount)
+        {
+            if (pair.Value > 1)
+            {
+                Console.Write(pair.Key + " ");
+            }
+        }
+    }
+
+    public static void Main()
+    {
+        // Test case
+        string input = "google";
+        FindDuplicateCharacters(input); // Output: Duplicate characters: o g
+    }
+}
