@@ -1,0 +1,80 @@
+************************************************************Question**********************************************************
+2. Maximum consecutive one’s (or zeros) in a binary array
+Given a binary array, find the count of a maximum number of consecutive 1s present in the array.
+
+Examples : 
+
+Input: arr[] = {1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1}
+Output: 4
+Explanation: The maximum number of consecutive 1’s in the array is 4 from index 8-11.
+
+
+Input: arr[] = {0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1}
+Output: 1
+Explanation: The maximum number of consecutive 0’s in the array is 1 from index 0-1.
+
+using System;
+
+public class Program
+{
+    public static int MaxConsecutiveOnes(int[] arr)
+    {
+        int maxCount = 0;
+        int currentCount = 0;
+
+        // Traverse the array
+        for (int i = 0; i < arr.Length; i++)
+        {
+            if (arr[i] == 1)
+            {
+                currentCount++; // Increment current streak of 1's
+                maxCount = Math.Max(maxCount, currentCount); // Update maxCount
+            }
+            else
+            {
+                currentCount = 0; // Reset current streak
+            }
+        }
+
+        return maxCount;
+    }
+
+    public static int MaxConsecutiveZeros(int[] arr)
+    {
+        int maxCount = 0;
+        int currentCount = 0;
+
+        // Traverse the array
+        for (int i = 0; i < arr.Length; i++)
+        {
+            if (arr[i] == 0)
+            {
+                currentCount++; // Increment current streak of 0's
+                maxCount = Math.Max(maxCount, currentCount); // Update maxCount
+            }
+            else
+            {
+                currentCount = 0; // Reset current streak
+            }
+        }
+
+        return maxCount;
+    }
+
+    public static void Main()
+    {
+        // Test cases for consecutive 1's
+        int[] arr1 = { 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1 };
+        Console.WriteLine(MaxConsecutiveOnes(arr1)); // Output: 4
+
+        int[] arr2 = { 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 };
+        Console.WriteLine(MaxConsecutiveOnes(arr2)); // Output: 1
+
+        // Test cases for consecutive 0's
+        int[] arr3 = { 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1 };
+        Console.WriteLine(MaxConsecutiveZeros(arr3)); // Output: 2
+
+        int[] arr4 = { 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 };
+        Console.WriteLine(MaxConsecutiveZeros(arr4)); // Output: 2
+    }
+}
