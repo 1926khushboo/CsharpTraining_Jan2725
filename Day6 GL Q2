@@ -1,0 +1,138 @@
+This exercise covers different aspects of C#.NET object types including properties, static members, and static classes.
+
+Task:
+
+Properties:
+Create a class named PropertyDemo with properties demonstrating different access modifiers and property types.
+Static Members:
+Create a class named StaticDemo with static members including variables, methods, and constructors.
+Static Class:
+Create a static class named MathHelper with static methods for performing mathematical operations.
+Instructions:
+
+Create the PropertyDemo, StaticDemo, and MathHelper classes as per the task requirements.
+Implement the properties, static members, and static methods with appropriate access modifiers and functionality.
+Include comments to explain the purpose and functionality of each class and member.
+using System;
+
+// Define PropertyDemo class
+public class PropertyDemo
+{
+    // Define prousingperties
+    // Complete Step 1:............
+}
+
+// Define StaticDemo class
+public class StaticDemo
+{
+    // Define static members
+    // Complete Step 2:............
+}
+
+// Define MathHelper static class
+public static class MathHelper
+{
+    // Define static methods
+    // Complete Step 3:............
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        // Demonstrate usage
+        // Complete Step 4:............
+    }
+}                                                                                                                                                                    expected output                                                                                                                                                   
+  5
+Private Value
+10
+Static Method
+15
+5
+****************************************************Program*********************************************
+using System;
+
+// Step 1: Define PropertyDemo class
+public class PropertyDemo
+{
+    // Public auto-implemented property
+    public int PublicProperty { get; set; }
+
+    // Private field with a public read-only property
+    private string _privateValue = "Private Value";
+    public string PrivateProperty => _privateValue; // Read-only
+
+    // Property with private setter
+    public int ReadOnlyProperty { get; private set; }
+
+    // Constructor to initialize ReadOnlyProperty
+    public PropertyDemo()
+    {
+        ReadOnlyProperty = 10;
+    }
+}
+
+// Step 2: Define StaticDemo class
+public class StaticDemo
+{
+    // Static variable
+    public static int StaticValue;
+
+    // Static constructor (runs once when accessed)
+    static StaticDemo()
+    {
+        StaticValue = 15;
+    }
+
+    // Static method
+    public static void StaticMethod()
+    {
+        Console.WriteLine("Static Method");
+    }
+}
+
+// Step 3: Define MathHelper static class
+public static class MathHelper
+{
+    // Static method for addition
+    public static int Add(int a, int b)
+    {
+        return a + b;
+    }
+
+    // Static method for subtraction
+    public static int Subtract(int a, int b)
+    {
+        return a - b;
+    }
+}
+
+// Step 4: Demonstrate usage in Main
+public class Program
+{
+    public static void Main()
+    {
+        // Create an instance of PropertyDemo
+        PropertyDemo obj = new PropertyDemo();
+
+        // Assign a value to the public property
+        obj.PublicProperty = 5;
+        Console.WriteLine(obj.PublicProperty); // Output: 5
+
+        // Access read-only property
+        Console.WriteLine(obj.PrivateProperty); // Output: Private Value
+
+        // Access property with private setter
+        Console.WriteLine(obj.ReadOnlyProperty); // Output: 10
+
+        // Call static method
+        StaticDemo.StaticMethod(); // Output: Static Method
+
+        // Access static variable
+        Console.WriteLine(StaticDemo.StaticValue); // Output: 15
+
+        // Call static methods from MathHelper
+        Console.WriteLine(MathHelper.Add(2, 3)); // Output: 5
+    }
+}
