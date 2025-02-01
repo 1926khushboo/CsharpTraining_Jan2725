@@ -1,0 +1,222 @@
+File handling:
+
+create a class Network and read data from file and display all the records in below format.
+
+Note: all the records should be stored in the List
+Example:output
+
+ID			Source		Destination			Date		Time		Status		Network
+***************************************************************************************
+1			86876786	878979723			1/16/2021	3:31:22 PM	Failed		Idea
+
+
+After display
+=> user can search by id r src r destinatn r staus r netwrk
+=> based on user input records should filterd and display
+
+
+Create classes based on netwrk names 
+
+Example:
+
+class Airtel{
+}
+
+class Idea{
+}
+
+->after create inherit Network class
+->example if we inherit network class with subclass Airtel then it should handle/display airtel records only
+  similary for all the classes.
+******************************************************************Program***************************************************************************
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+// Base class for Network
+public class Network
+{
+    public int ID { get; set; }
+    public string Source { get; set; }
+    public string Destination { get; set; }
+    public string Date { get; set; }
+    public string Time { get; set; }
+    public string Status { get; set; }
+    public string NetworkName { get; set; }
+
+    // List to store all records
+    public static List<Network> Records = new List<Network>();
+
+    // Method to read data from file and store in the list
+    public static void ReadDataFromFile(string filePath)
+    {
+        try
+        {
+            string[] lines = File.ReadAllLines(filePath);
+            foreach (string line in lines)
+            {
+                string[] data = line.Split(',');
+                Network record = new Network
+                {
+                    ID = int.Parse(data[0]),
+                    Source = data[1],
+                    Destination = data[2],
+                    Date = data[3],
+                    Time = data[4],
+                    Status = data[5],
+                    NetworkName = data[6]
+                };
+                Records.Add(record);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error reading file: " + ex.Message);
+        }
+    }
+
+    // Method to display all records
+    public static void DisplayAllRecords()
+    {
+        Console.WriteLine("ID\t\tSource\t\tDestination\t\tDate\t\tTime\t\tStatus\t\tNetwork");
+        Console.WriteLine("***************************************************************************************");
+        foreach (var record in Records)
+        {
+            Console.WriteLine($"{record.ID}\t\t{record.Source}\t\t{record.Destination}\t\t{record.Date}\t\t{record.Time}\t\t{record.Status}\t\t{record.NetworkName}");
+        }
+    }
+
+    // Method to search records based on user input
+    public static void SearchRecords(string searchBy, string searchValue)
+    {
+        var filteredRecords = Records.Where(record =>
+        {
+            switch (searchBy.ToLower())
+            {
+                case "id":
+                    return record.ID.ToString() == searchValue;
+                case "source":
+                    return record.Source == searchValue;
+                case "destination":
+                    return record.Destination == searchValue;
+                case "status":
+                    return record.Status == searchValue;
+                case "network":
+                    return record.NetworkName == searchValue;
+                default:
+                    return false;
+            }
+        }).ToList();
+
+        if (filteredRecords.Any())
+        {
+            Console.WriteLine("Filtered Records:");
+            Console.WriteLine("ID\t\tSource\t\tDestination\t\tDate\t\tTime\t\tStatus\t\tNetwork");
+            Console.WriteLine("***************************************************************************************");
+            foreach (var record in filteredRecords)
+            {
+                Console.WriteLine($"{record.ID}\t\t{record.Source}\t\t{record.Destination}\t\t{record.Date}\t\t{record.Time}\t\t{record.Status}\t\t{record.NetworkName}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("No records found matching the search criteria.");
+        }
+    }
+}
+
+// Subclass for Airtel
+public class Airtel : Network
+{
+    public void DisplayAirtelRecords()
+    {
+        var airtelRecords = Records.Where(record => record.NetworkName == "Airtel").ToList();
+        Console.WriteLine("Airtel Records:");
+        Console.WriteLine("ID\t\tSource\t\tDestination\t\tDate\t\tTime\t\tStatus\t\tNetwork");
+        Console.WriteLine("***************************************************************************************");
+        foreach (var record in airtelRecords)
+        {
+            Console.WriteLine($"{record.ID}\t\t{record.Source}\t\t{record.Destination}\t\t{record.Date}\t\t{record.Time}\t\t{record.Status}\t\t{record.NetworkName}");
+        }
+    }
+}
+
+// Subclass for Idea
+public class Idea : Network
+{
+    public void DisplayIdeaRecords()
+    {
+        var ideaRecords = Records.Where(record => record.NetworkName == "Idea").ToList();
+        Console.WriteLine("Idea Records:");
+        Console.WriteLine("ID\t\tSource\t\tDestination\t\tDate\t\tTime\t\tStatus\t\tNetwork");
+        Console.WriteLine("***************************************************************************************");
+        foreach (var record in ideaRecords)
+        {
+            Console.WriteLine($"{record.ID}\t\t{record.Source}\t\t{record.Destination}\t\t{record.Date}\t\t{record.Time}\t\t{record.Status}\t\t{record.NetworkName}");
+        }
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        // Read data from file
+        Network.ReadDataFromFile("network_data.txt");
+
+        // Display all records
+        Network.DisplayAllRecords();
+
+        // Search functionality
+        Console.WriteLine("\nEnter search criteria (id, source, destination, status, network):");
+        string searchBy = Console.ReadLine();
+        Console.WriteLine("Enter search value:");
+        string searchValue = Console.ReadLine();
+        Network.SearchRecords(searchBy, searchValue);
+
+        // Display records for specific networks
+        Airtel airtel = new Airtel();
+        airtel.DisplayAirtelRecords();
+
+        Idea idea = new Idea();
+        idea.DisplayIdeaRecords();
+    }
+}
+
+************************************************************Example output**************************************************
+Exmaple(network.test.file)
+
+
+1,86876786,878979723,1/16/2021,3:31:22 PM,Failed,Idea
+2,12345678,987654321,1/17/2021,4:45:10 PM,Success,Airtel
+3,55555555,666666666,1/18/2021,5:15:30 PM,Failed,Idea
+4,11111111,222222222,1/19/2021,6:00:00 PM,Success,Airtel
+ID		Source		Destination		Date		Time		Status		Network
+***************************************************************************************
+1		86876786	878979723		1/16/2021	3:31:22 PM	Failed		Idea
+2		12345678	987654321		1/17/2021	4:45:10 PM	Success		Airtel
+3		55555555	666666666		1/18/2021	5:15:30 PM	Failed		Idea
+4		11111111	222222222		1/19/2021	6:00:00 PM	Success		Airtel
+
+Enter search criteria (id, source, destination, status, network):
+network
+Enter search value:
+Idea
+Filtered Records:
+ID		Source		Destination		Date		Time		Status		Network
+***************************************************************************************
+1		86876786	878979723		1/16/2021	3:31:22 PM	Failed		Idea
+3		55555555	666666666		1/18/2021	5:15:30 PM	Failed		Idea
+
+Airtel Records:
+ID		Source		Destination		Date		Time		Status		Network
+***************************************************************************************
+2		12345678	987654321		1/17/2021	4:45:10 PM	Success		Airtel
+4		11111111	222222222		1/19/2021	6:00:00 PM	Success		Airtel
+
+Idea Records:
+ID		Source		Destination		Date		Time		Status		Network
+***************************************************************************************
+1		86876786	878979723		1/16/2021	3:31:22 PM	Failed		Idea
+3		55555555	666666666		1/18/2021	5:15:30 PM	Failed		Idea
