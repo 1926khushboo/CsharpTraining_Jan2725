@@ -1,0 +1,41 @@
+Get all unique characters in a string
+
+Example:
+you can see the output as"gole". This means after removing duplicate characters from the word "google," we get the "gole" which are unique chars.
+
+***using System;
+using System.Collections.Generic;
+
+public class Program
+{
+    public static void GetUniqueCharacters(string input)
+    {
+        // HashSet to store unique characters
+        HashSet<char> uniqueChars = new HashSet<char>();
+
+        // Convert the string to lowercase to make it case-insensitive
+        input = input.ToLower();
+
+        // Iterate through each character in the string
+        foreach (char c in input)
+        {
+            // Add the character to the HashSet (duplicates are automatically ignored)
+            uniqueChars.Add(c);
+        }
+
+        // Print the unique characters
+        Console.Write("Unique characters: ");
+        foreach (char c in uniqueChars)
+        {
+            Console.Write(c + " ");
+        }
+    }
+
+    public static void Main()
+    {
+        // Test case
+        string input = "google";
+        GetUniqueCharacters(input); // Output: Unique characters: g o l e
+    }
+}
+***************************************Program***********************************************
