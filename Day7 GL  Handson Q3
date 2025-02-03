@@ -19,78 +19,67 @@ Document your code with comments to explain the purpose and usage of the custom 
 
 ********************************************************Program*****************************************************************
 using System;
+using System.Reflection;
 
-// Define your custom attribute class here
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Property,
-AllowMultiple = true)]
-class MyCustomAttribute : Attribute
-{
-public string Description { get; private set; }
-public int Version { get; private set; }
 
-public MyCustomAttribute(string description, int version)
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Property)]
+public class CustomDescriptionAttribute : Attribute
 {
-Description = description;
-Version = version;
+    public string Description { get; }
+    public int Version { get; }
+
+    public CustomDescriptionAttribute(string description, int version)
+    {
+        Description = description;
+        Version = version;
+    }
 }
-}
-
-// Example usage of the custom attribute
-[MyCustom("This is a sample class.", 1)]
-class MyClass
+[CustomDescription("This is a sample class.", 1)] 
+public class SampleClass
 {
-// Apply attribute to a method
-[MyCustom("This is a sample method.", 2)]
-public void MyMethod()
-{
-// Method implementation
-}
+    [CustomDescription("This is a sample method.", 2)]
+    public void SampleMethod()
+    {
+    }
 
-// Apply attribute to a property
-[MyCustom("This is a sample property.", 3)]
-public int MyProperty { get; set; }
+    private string _sampleProperty;
+
+    [CustomDescription("This is a sample property.", 3)] 
+    public string SampleProperty
+    {
+        get { return _sampleProperty; }
+        set { _sampleProperty = value; }
+    }
 }
 
 class Program
 {
-static void Main(string[] args)
-{
-// Implement scenarios to demonstrate attribute usage
-MyClass obj = new MyClass();
+    static void Main(string[] args)
+    {
+        
+        Type type = typeof(SampleClass);
 
-// Retrieve attributes applied to MyClass
-var classAttributes = Attribute.GetCustomAttributes(typeof(MyClass));
-foreach (var attr in classAttributes)
-{
-if (attr is MyCustomAttribute myAttr)
-{
-Console.WriteLine($"Class Description: {myAttr.Description}, Version: {myAttr.Version}");
+        var classAttribute = (CustomDescriptionAttribute)Attribute.GetCustomAttribute(type, typeof(CustomDescriptionAttribute));
+        if (classAttribute != null)
+        {
+            Console.WriteLine($"Class Description: {classAttribute.Description}, Version: {classAttribute.Version}");
+        }
 
-}
-}
+        MethodInfo method = type.GetMethod("SampleMethod");
+        var methodAttribute = (CustomDescriptionAttribute)Attribute.GetCustomAttribute(method, typeof(CustomDescriptionAttribute));
+        if (methodAttribute != null)
+        {
+            Console.WriteLine($"Method Description: {methodAttribute.Description}, Version: {methodAttribute.Version}");
+        }
 
-// Retrieve attributes applied to MyMethod
-var methodInfo = typeof(MyClass).GetMethod("MyMethod");
-var methodAttributes = Attribute.GetCustomAttributes(methodInfo);
-foreach (var attr in methodAttributes)
-{
-if (attr is MyCustomAttribute myAttr)
-{
-Console.WriteLine($"Method Description: {myAttr.Description}, Version:
-{myAttr.Version}");
-}
-}
+        PropertyInfo property = type.GetProperty("SampleProperty");
+        var propertyAttribute = (CustomDescriptionAttribute)Attribute.GetCustomAttribute(property, typeof(CustomDescriptionAttribute));
+        if (propertyAttribute != null)
+        {
+            Console.WriteLine($"Property Description: {propertyAttribute.Description}, Version: {propertyAttribute.Version}");
+        }
 
-// Retrieve attributes applied to MyProperty
-var propertyInfo = typeof(MyClass).GetProperty("MyProperty");
-var propertyAttributes = Attribute.GetCustomAttributes(propertyInfo);
-foreach (var attr in propertyAttributes)
-{
-if (attr is MyCustomAttribute myAttr)
-{
-Console.WriteLine($"Property Description: {myAttr.Description}, Version:
-{myAttr.Version}");
-}
-}
-}
+        SampleClass sample = new SampleClass();
+        sample.SampleMethod(); 
+    }
 }
