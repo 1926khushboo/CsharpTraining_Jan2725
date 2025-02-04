@@ -1,0 +1,153 @@
+Create a simple .NET class library that implements a basic calculator with arithmetic operations.
+Then, write unit tests for this class using a testing framework of your choice (NUnit, MSTest, or
+XTest).
+User Stories and Expectations
+User Story 1: Implement Calculator
+● As a developer, you need to create a simple calculator class that supports basic
+arithmetic operations.
+● Acceptance Criteria:
+○ Implement a class Calculator with methods for addition, subtraction,
+multiplication, and division.
+○ Methods:
+■ Add(double a, double b)
+■ Subtract(double a, double b)
+■ Multiply(double a, double b)
+■ Divide(double a, double b): Handle division by zero with an
+appropriate exception.
+User Story 2: Setup Testing Framework
+● As a developer, you need to set up a testing framework and write unit tests for the
+calculator methods.
+● Acceptance Criteria:
+○ Choose a testing framework (NUnit, MSTest, or XTest).
+○ Create a test project in the same solution as your class library.
+○ Write test cases for each method in the Calculator class.
+User Story 3: Write Unit Tests
+Daily Coding Assignment Wipro NGA .NET Cohort
+● As a developer, you need to write unit tests to verify that the calculator methods work
+correctly.
+● Acceptance Criteria:
+○ Write test cases to verify:
+■ Correct results for valid inputs.
+■ Handling of division by zero.
+■ Correct results for edge cases (e.g., adding/subtracting zero).
+○ Use assertions to validate the test results (e.g., Assert.AreEqual,
+Assert.IsTrue).
+
+***********************************************Prgram forCalculatorLibrary**************************************************************************
+// Calculator.cs
+namespace CalculatorLibrary
+{
+    public class Calculator
+    {
+        public double Add(double a, double b)
+        {
+            return a + b;
+        }
+
+        public double Subtract(double a, double b)
+        {
+            return a - b;
+        }
+
+        public double Multiply(double a, double b)
+        {
+            return a * b;
+        }
+
+        public double Divide(double a, double b)
+        {
+            if (b == 0)
+            {
+                throw new DivideByZeroException("Cannot divide by zero.");
+            }
+            return a / b;
+        }
+    }
+}
+
+
+****************************************************************Calculator.Test*********************************************************************
+// CalculatorTests.cs
+using NUnit.Framework;
+using CalculatorLibrary;
+
+namespace CalculatorLibrary.Tests
+{
+    [TestFixture]
+    public class CalculatorTests
+    {
+        private Calculator _calculator;
+
+        [SetUp]
+        public void Setup()
+        {
+            _calculator = new Calculator();
+        }
+
+        // Test cases for Add method
+        [Test]
+        public void Add_ValidInputs_ReturnsCorrectResult()
+        {
+            double result = _calculator.Add(5, 3);
+            Assert.AreEqual(8, result);
+        }
+
+        [Test]
+        public void Add_EdgeCase_AddingZero_ReturnsSameNumber()
+        {
+            double result = _calculator.Add(5, 0);
+            Assert.AreEqual(5, result);
+        }
+
+        // Test cases for Subtract method
+        [Test]
+        public void Subtract_ValidInputs_ReturnsCorrectResult()
+        {
+            double result = _calculator.Subtract(5, 3);
+            Assert.AreEqual(2, result);
+        }
+
+        [Test]
+        public void Subtract_EdgeCase_SubtractingZero_ReturnsSameNumber()
+        {
+            double result = _calculator.Subtract(5, 0);
+            Assert.AreEqual(5, result);
+        }
+
+        // Test cases for Multiply method
+        [Test]
+        public void Multiply_ValidInputs_ReturnsCorrectResult()
+        {
+            double result = _calculator.Multiply(5, 3);
+            Assert.AreEqual(15, result);
+        }
+
+        [Test]
+        public void Multiply_EdgeCase_MultiplyingByZero_ReturnsZero()
+        {
+            double result = _calculator.Multiply(5, 0);
+            Assert.AreEqual(0, result);
+        }
+
+        // Test cases for Divide method
+        [Test]
+        public void Divide_ValidInputs_ReturnsCorrectResult()
+        {
+            double result = _calculator.Divide(6, 3);
+            Assert.AreEqual(2, result);
+        }
+
+        [Test]
+        public void Divide_ByZero_ThrowsDivideByZeroException()
+        {
+            Assert.Throws<DivideByZeroException>(() => _calculator.Divide(6, 0));
+        }
+
+        [Test]
+        public void Divide_EdgeCase_DividingZeroByNumber_ReturnsZero()
+        {
+            double result = _calculator.Divide(0, 5);
+            Assert.AreEqual(0, result);
+        }
+    }
+}
