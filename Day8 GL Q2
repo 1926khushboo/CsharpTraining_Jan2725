@@ -1,0 +1,273 @@
+Coding Assignment: Building a Simple Library Management System
+ Duration: 90 minutes
+ Objective: Implement a basic library management system that includes functionality for adding,
+ viewing, and managing books and borrowers. Write unit tests to ensure the system works
+ correctly.
+ Problem Statement
+ You are tasked with developing a simple library management system that supports the following
+ operations:
+ 1. AddaNewBook:Users should be able to add new books to the library with details
+ such as title, author, and ISBN number.
+ 2. Register a Borrower: Users should be able to register new borrowers with their name
+ and library card number.
+ 3. Borrow a Book: Borrowers should be able to borrow a book from the library.
+ 4. Return a Book: Borrowers should be able to return a book to the library.
+ 5. View Books and Borrowers: Users should be able to view a list of all books and
+ borrowers.
+ User Stories and Expectations
+ User Story 1: Add a New Book
+ ● Asauser, Iwant to be able to add a new book to the library.
+ ● Acceptance Criteria:
+ ○ Thesystem should accept a book's title, author, and ISBN number.
+ ○ Thesystem should store the book's details in a list.
+ ○ Thesystem should confirm that the book has been added successfully.
+ User Story 2: Register a Borrower
+ ● Asauser, Iwant to be able to register a new borrower.
+ ● Acceptance Criteria:
+ ○ Thesystem should accept the borrower's name and library card number.
+ ○ Thesystem should store the borrower's details in a list.
+ ○ Thesystem should confirm that the borrower has been registered successfully.
+Daily Coding Assignment Wipro NGA .NET Cohort
+ User Story 3: Borrow a Book
+ ● Asaborrower, I want to be able to borrow a book from the library.
+ ● Acceptance Criteria:
+ ○ Thesystem should allow a borrower to select a book from the library.
+ ○ Thesystem should mark the book as borrowed.
+ ○ Thesystem should associate the borrowed book with the borrower's details.
+ User Story 4: Return a Book
+ ● Asaborrower, I want to be able to return a borrowed book to the library.
+ ● Acceptance Criteria:
+ ○ Thesystem should allow a borrower to return a book.
+ ○ Thesystem should mark the book as available for borrowing again.
+ ○ Thesystem should update the borrower's record to reflect the returned book.
+ User Story 5: View Books and Borrowers
+ ● Asauser, Iwant to be able to view all books and borrowers.
+ ● Acceptance Criteria:
+ ○ Thesystem should provide a list of all books in the library, showing their details
+ and current status (available/borrowed).
+ ○ Thesystem should provide a list of all borrowers, showing their details and
+ borrowed books (if any).
+ Coding Assignment
+ Task 1: Implement Classes
+ Create the following classes:
+ 1. Book
+ ○ Properties: Title, Author, ISBN, IsBorrowed
+ ○ Methods: Borrow(), Return()
+ 2. Borrower
+ ○ Properties: Name, LibraryCardNumber, BorrowedBooks (a list of books)
+ ○ Methods: BorrowBook(Book book), ReturnBook(Book book)
+ 3. Library
+ ○ Properties: Books (a list of books), Borrowers (a list of borrowers)
+ ○ Methods: AddBook(Book book), RegisterBorrower(Borrower
+ borrower), BorrowBook(string isbn, string libraryCardNumber),
+Daily Coding Assignment Wipro NGA .NET Cohort
+ ReturnBook(string isbn, string libraryCardNumber),
+ ViewBooks(), ViewBorrowers()
+ Task 2: Write Unit Tests
+ Write unit tests for the following scenarios using NUnit or MSTest:
+ 1. Adding a Book:
+ ○ Test that a book is added correctly to the library.
+ 2. Registering a Borrower:
+ ○ Test that a borrower is registered correctly.
+ 3. Borrowing a Book:
+ ○ Test that a book can be borrowed and is marked as borrowed.
+ ○ Test that the book is correctly associated with the borrower.
+ 4. Returning a Book:
+ ○ Test that a book can be returned and is marked as available.
+ ○ Test that the book is correctly removed from the borrower's list.
+ 5. Viewing Books and Borrowers:
+ ○ Test that the list of books and borrowers is displayed correctly.
+ Expectations
+ ● CodeQuality: Your code should be clean, well-organized, and follow best practices.
+ ● UnitTests: Ensure that all tests are written to cover the scenarios described and are
+ passing.
+ ● Documentation: Include comments and documentation where necessary to explain
+ your code and tests.
+ ● Submission: Submit your implementation of the classes and the unit tests as a single
+ project.
+ This assignment will assess your ability to design a basic system, implement functionality, and
+ write comprehensive unit tests.In c#
+
+****************************************************************program************************************************************************
+Book.cs
+namespace Library_Management_System
+{
+    public class Book
+    {
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public string ISBN { get; set; }
+        public bool IsBorrowed { get; set; }
+
+        public void Borrow()
+        {
+            IsBorrowed = true;
+        }
+
+        public void Return()
+        {
+            IsBorrowed = false;
+        }
+    }
+}
+
+Borrower.cs
+namespace Library_Management_System
+{
+    public class Borrower
+    {
+        public string Name { get; set; }
+        public string LibraryCardNumber { get; set; }
+        public List<Book> BorrowedBooks { get; set; } = new List<Book>();
+
+        public void BorrowBook(Book book)
+        {
+            BorrowedBooks.Add(book);
+        }
+
+        public void ReturnBook(Book book)
+        {
+            BorrowedBooks.Remove(book);
+        }
+    }
+}
+
+
+***********************************************Library.cs***********************************************
+namespace Library_Management_System
+{
+    public class Library
+    {
+        public List<Book> Books { get; set; } = new List<Book>();
+        public List<Borrower> Borrowers { get; set; } = new List<Borrower>();
+
+        public void AddBook(Book book)
+        {
+            Books.Add(book);
+        }
+
+        public void RegisterBorrower(Borrower borrower)
+        {
+            Borrowers.Add(borrower);
+        }
+
+        public void BorrowBook(string isbn, string libraryCardNumber)
+        {
+            var book = Books.FirstOrDefault(b => b.ISBN == isbn);
+            var borrower = Borrowers.FirstOrDefault(b => b.LibraryCardNumber == libraryCardNumber);
+
+            if (book != null && borrower != null)
+            {
+                book.Borrow();
+                borrower.BorrowBook(book);
+            }
+        }
+
+        public void ReturnBook(string isbn, string libraryCardNumber)
+        {
+            var book = Books.FirstOrDefault(b => b.ISBN == isbn);
+            var borrower = Borrowers.FirstOrDefault(b => b.LibraryCardNumber == libraryCardNumber);
+
+            if (book != null && borrower != null)
+            {
+                book.Return();
+                borrower.ReturnBook(book);
+            }
+        }
+
+        public void ViewBooks()
+        {
+            foreach (var book in Books)
+            {
+                Console.WriteLine($"Title: {book.Title}, Author: {book.Author}, ISBN: {book.ISBN}, Status: {(book.IsBorrowed ? "Borrowed" : "Available")}");
+            }
+        }
+
+        public void ViewBorrowers()
+        {
+            foreach (var borrower in Borrowers)
+            {
+                Console.WriteLine($"Name: {borrower.Name}, Library Card: {borrower.LibraryCardNumber}");
+                foreach (var book in borrower.BorrowedBooks)
+                {
+                    Console.WriteLine($"  Borrowed Book: {book.Title}");
+                }
+            }
+        }
+    }
+}
+****************************************************************LibraryTests.cs****************************************
+using Library_Management_System;
+
+namespace LibraryManagement.Test
+{
+    [TestFixture]
+    public class LibraryTests
+    {
+        private Library _library;
+        private Book _book;
+        private Borrower _borrower;
+
+        [SetUp]
+        public void Setup()
+        {
+            _library = new Library();
+            _book = new Book { Title = "C# Programming", Author = "John Doe", ISBN = "12345" };
+            _borrower = new Borrower { Name = "Alice", LibraryCardNumber = "LC123" };
+
+        }
+
+        [Test]
+        public void AddBook_ShouldAddBookToLibrary()
+        {
+            _library.AddBook(_book);
+            Assert.AreEqual(1, _library.Books.Count);
+            Assert.AreEqual("C# Programming", _library.Books[0].Title);
+
+
+        }
+        [Test]
+        public void RegisterBorrower_ShouldAddBorrowerToLibrary()
+        {
+            _library.RegisterBorrower(_borrower);
+            Assert.AreEqual(1, _library.Borrowers.Count);
+            Assert.AreEqual("Alice", _library.Borrowers[0].Name);
+        }
+
+        [Test]
+        public void BorrowBook_ShouldMarkBookAsBorrowed()
+        {
+            _library.AddBook(_book);
+            _library.RegisterBorrower(_borrower);
+            _library.BorrowBook("12345", "LC123");
+
+            Assert.IsTrue(_book.IsBorrowed);
+            Assert.AreEqual(1, _borrower.BorrowedBooks.Count);
+        }
+
+        [Test]
+        public void ReturnBook_ShouldMarkBookAvailable()
+        {
+            _library.AddBook(_book);
+            _library.RegisterBorrower(_borrower);
+            _library.BorrowBook("12345", "LC123");
+            _library.ReturnBook("12345", "LC123");
+
+            Assert.IsFalse(_book.IsBorrowed);
+            Assert.AreEqual(0, _borrower.BorrowedBooks.Count);
+        }
+        [Test]
+        public void viewBooks_ShoulddisplayAllBooks()
+        {
+            _library.AddBook(_book);
+            _library.ViewBooks();
+        }
+        [Test]
+        public void ViewBorrowers_ShouldDisplayAllBorrowers()
+        {
+            _library.RegisterBorrower(_borrower);
+            _library.ViewBorrowers();
+        }
+
+    }
+}
