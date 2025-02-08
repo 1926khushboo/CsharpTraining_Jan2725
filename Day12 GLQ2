@@ -1,0 +1,164 @@
+Write a query to find the top 3 countries by the total number of films rented by customers living in those countries.
+
+
+
+Sample Output:
+
+Country_id
+ 
+Country	rental_count
+ 
+44	India	1572
+
+
+
+
+Table: actor
+Showing top 5 rows
+
+actor_id	first_name	last_name	last_update
+1	PENELOPE	GUINESS	2006-02-15 04:34:33
+2	NICK	WAHLBERG	2006-02-15 04:34:33
+3	ED	CHASE	2006-02-15 04:34:33
+4	JENNIFER	DAVIS	2006-02-15 04:34:33
+5	JOHNNY	LOLLOBRIGIDA	2006-02-15 04:34:33
+Table: address
+Showing top 5 rows
+
+address_id	address	address2	district	city_id	postal_code	phone	last_update
+1	47 Myfilm_rental Drive		Alberta	300			2014-09-25 22:30:27
+2	28 MySQL Boulevard		QLD	576			2014-09-25 22:30:09
+3	23 Workhaven Lane		Alberta	300		14033335568	2014-09-25 22:30:27
+4	1411 Lillydale Drive		QLD	576		6172235589	2014-09-25 22:30:09
+5	1913 Hanoi Way		Nagasaki	463	35200	28303384290	2014-09-25 22:31:53
+Table: category
+Showing top 5 rows
+
+category_id	name	last_update
+1	Action	2006-02-15 04:46:27
+2	Animation	2006-02-15 04:46:27
+3	Children	2006-02-15 04:46:27
+4	Classics	2006-02-15 04:46:27
+5	Comedy	2006-02-15 04:46:27
+Table: city
+Showing top 5 rows
+
+city_id	city	country_id	last_update
+1	A Coruña (La Coruña)	87	2006-02-15 04:45:25
+2	Abha	82	2006-02-15 04:45:25
+3	Abu Dhabi	101	2006-02-15 04:45:25
+4	Acuña	60	2006-02-15 04:45:25
+5	Adana	97	2006-02-15 04:45:25
+Table: country
+Showing top 5 rows
+
+country_id	country	last_update
+1	Afghanistan	2006-02-15 04:44:00
+2	Algeria	2006-02-15 04:44:00
+3	American Samoa	2006-02-15 04:44:00
+4	Angola	2006-02-15 04:44:00
+5	Anguilla	2006-02-15 04:44:00
+Table: customer
+Showing top 5 rows
+
+customer_id	store_id	first_name	last_name	email	address_id	active	create_date	last_update
+1	1	MARY	SMITH	MARY.SMITH@film_rentalcustomer.org	5	1	2006-02-14 22:04:36	2006-02-15 04:57:20
+2	1	PATRICIA	JOHNSON	PATRICIA.JOHNSON@film_rentalcustomer.org	6	1	2006-02-14 22:04:36	2006-02-15 04:57:20
+3	1	LINDA	WILLIAMS	LINDA.WILLIAMS@film_rentalcustomer.org	7	1	2006-02-14 22:04:36	2006-02-15 04:57:20
+4	2	BARBARA	JONES	BARBARA.JONES@film_rentalcustomer.org	8	1	2006-02-14 22:04:36	2006-02-15 04:57:20
+5	1	ELIZABETH	BROWN	ELIZABETH.BROWN@film_rentalcustomer.org	9	1	2006-02-14 22:04:36	2006-02-15 04:57:20
+Table: film
+Showing top 5 rows
+
+film_id	title	description	release_year	language_id	original_language_id	rental_duration	rental_rate	length	replacement_cost	rating	special_features	last_update
+1	ACADEMY DINOSAUR	A Epic Drama of a Feminist And a Mad Scientist who must Battle a Teacher in The Canadian Rockies	2006	1		6	0.99	86	20.99	PG	Deleted Scenes,Behind the Scenes	2006-02-15 05:03:42
+2	ACE GOLDFINGER	A Astounding Epistle of a Database Administrator And a Explorer who must Find a Car in Ancient China	2006	1		3	4.99	48	12.99	G	Trailers,Deleted Scenes	2006-02-15 05:03:42
+3	ADAPTATION HOLES	A Astounding Reflection of a Lumberjack And a Car who must Sink a Lumberjack in A Baloon Factory	2006	1		7	2.99	50	18.99	NC-17	Trailers,Deleted Scenes	2006-02-15 05:03:42
+4	AFFAIR PREJUDICE	A Fanciful Documentary of a Frisbee And a Lumberjack who must Chase a Monkey in A Shark Tank	2006	1		5	2.99	117	26.99	G	Commentaries,Behind the Scenes	2006-02-15 05:03:42
+5	AFRICAN EGG	A Fast-Paced Documentary of a Pastry Chef And a Dentist who must Pursue a Forensic Psychologist in The Gulf of Mexico	2006	1		6	2.99	130	22.99	G	Deleted Scenes	2006-02-15 05:03:42
+Table: film_actor
+Showing top 5 rows
+
+actor_id	film_id	last_update
+1	1	2006-02-15 05:05:03
+1	23	2006-02-15 05:05:03
+1	25	2006-02-15 05:05:03
+1	106	2006-02-15 05:05:03
+1	140	2006-02-15 05:05:03
+Table: film_category
+Showing top 5 rows
+
+film_id	category_id	last_update
+1	6	2006-02-15 05:07:09
+2	11	2006-02-15 05:07:09
+3	6	2006-02-15 05:07:09
+4	11	2006-02-15 05:07:09
+5	8	2006-02-15 05:07:09
+Table: inventory
+Showing top 5 rows
+
+inventory_id	film_id	store_id	last_update
+1	1	1	2006-02-15 05:09:17
+2	1	1	2006-02-15 05:09:17
+3	1	1	2006-02-15 05:09:17
+4	1	1	2006-02-15 05:09:17
+5	1	2	2006-02-15 05:09:17
+Table: language
+Showing top 5 rows
+
+language_id	name	last_update
+1	English	2006-02-15 05:02:19
+2	Italian	2006-02-15 05:02:19
+3	Japanese	2006-02-15 05:02:19
+4	Mandarin	2006-02-15 05:02:19
+5	French	2006-02-15 05:02:19
+Table: payment
+Showing top 5 rows
+
+payment_id	customer_id	staff_id	rental_id	amount	payment_date	last_update
+1	1	1	76	2.99	2005-05-25 11:30:37	2006-02-15 22:12:30
+2	1	1	573	0.99	2005-05-28 10:35:23	2006-02-15 22:12:30
+3	1	1	1185	5.99	2005-06-15 00:54:12	2006-02-15 22:12:30
+4	1	2	1422	0.99	2005-06-15 18:02:53	2006-02-15 22:12:30
+5	1	2	1476	9.99	2005-06-15 21:08:46	2006-02-15 22:12:30
+Table: rental
+Showing top 5 rows
+
+rental_id	rental_date	inventory_id	customer_id	return_date	staff_id	last_update
+1	2005-05-24 22:53:30	367	130	2005-05-26 22:04:30	1	2006-02-15 21:30:53
+2	2005-05-24 22:54:33	1525	459	2005-05-28 19:40:33	1	2006-02-15 21:30:53
+3	2005-05-24 23:03:39	1711	408	2005-06-01 22:12:39	1	2006-02-15 21:30:53
+4	2005-05-24 23:04:41	2452	333	2005-06-03 01:43:41	2	2006-02-15 21:30:53
+5	2005-05-24 23:05:21	2079	222	2005-06-02 04:33:21	1	2006-02-15 21:30:53
+Table: staff
+Showing top 5 rows
+
+staff_id	first_name	last_name	address_id	email	store_id	active	username	last_update
+1	Mike	Hillyer	3	Mike.Hillyer@film_rentalstaff.com	1	1	Mike	2006-02-15 03:57:16
+2	Jon	Stephens	4	Jon.Stephens@film_rentalstaff.com	2	1	Jon	2006-02-15 03:57:16
+Table: store
+Showing top 5 rows
+
+store_id	manager_staff_id	address_id	last_update
+1	1	1	2006-02-15 04:57:12
+2	2	2	2006-02-15 04:57:12
+****************************************************************Program*******************************************************************************8
+SELECT 
+    co.country_id,
+    co.country,
+    COUNT(r.rental_id) AS rental_count
+FROM 
+    rental r
+JOIN 
+    customer c ON r.customer_id = c.customer_id
+JOIN 
+    address a ON c.address_id = a.address_id
+JOIN 
+    city ci ON a.city_id = ci.city_id
+JOIN 
+    country co ON ci.country_id = co.country_id
+GROUP BY 
+    co.country_id, co.country
+ORDER BY 
+    rental_count DESC
+LIMIT 3;
