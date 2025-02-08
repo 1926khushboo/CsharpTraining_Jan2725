@@ -1,0 +1,70 @@
+We have a table named SpareParts that contains information about various spare parts, including the quantity available and the vehicle model they belong to.
+
+Now, write a SQL query to get the total quantity of all spare parts for a particular vehicle model.
+
+Sample Output:
+
+TotalQuantity
+35
+Table: dealerships
+Showing top 5 rows
+
+DealershipID	Location	TotalSales	TotalRevenue
+1	81858 Miranda Extensions Suite 287\nMillermouth, IL 20741	154	93546
+2	398 Henry Parkway\nMarthabury, PW 44533	423	93523
+3	662 Rebecca Valley\nMendozamouth, DE 50780	345	27027
+4	32814 Hill Orchard Apt. 657\nBrianberg, MN 70813	37	37916
+5	136 Rodriguez Tunnel Suite 647\nWest Patriciafurt, UT 33802	310	75689
+Table: insuranceclaims
+Showing top 5 rows
+
+ClaimID	VehicleID	ClaimDate	ClaimAmount	ClaimType
+1	32	2022-12-23	9127	sold
+2	3	2023-07-07	1760	rental
+3	22	2022-11-25	9471	sold
+4	95	2023-06-08	2788	sold
+5	32	2022-10-11	2257	sold
+Table: rentals
+Showing top 5 rows
+
+RentalID	VehicleID	CustomerID	RentalStartDate	RentalEndDate	TotalRentalCost
+1	22	59	2022-07-24	2023-10-09	7459
+2	72	81	2023-06-25	2023-08-06	7908
+3	35	77	2022-12-12	2024-03-28	7970
+4	42	60	2023-04-17	2023-11-14	7288
+5	55	57	2022-10-16	2024-03-07	1551
+Table: spareparts
+Showing top 5 rows
+
+PartID	Name	Quantity	Model
+1	set	53	seem
+2	security	66	people
+3	owner	35	four
+4	indicate	41	young
+5	see	61	occur
+Table: trafficviolations
+Showing top 5 rows
+
+ViolationID	VehicleID	ViolationDate	FineAmount
+1	73	2023-06-05	388
+2	46	2022-08-17	346
+3	82	2023-03-06	113
+4	83	2023-03-07	222
+5	30	2023-01-24	369
+Table: vehicles
+Showing top 5 rows
+
+VehicleID	Model	Type	DealershipID	LastMaintenanceDate
+1	sometimes	sedan	23	2023-02-06
+2	capital	truck	51	2023-01-21
+3	evidence	SUV	6	2023-05-03
+4	use	motorcycle	78	2023-04-03
+5	send	SUV	48	2023-06-28
+Note: Test your code before submitting the quiz
+***************************************Program********************************************************
+SELECT 
+    SUM(Quantity) AS TotalQuantity
+FROM 
+    SpareParts
+WHERE 
+    Model = 'four';
