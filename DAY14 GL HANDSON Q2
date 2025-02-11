@@ -1,0 +1,30 @@
+Instructions: Write a function repeatCharacter(character, count) that takes a character and a number as input and returns a string with the character repeated the specified number of times.
+
+Hints:
+
+Declare a variable result and initialize it as an empty string.
+Use a for loop to iterate count times.
+In each iteration, append the character to the result string.
+Return the result string as the output of the function.
+****************************************************************PROGRAM********************************************************************************
+input_array = getProgramInputs();
+
+var character = input_array[0];
+var count = Number(input_array[1]);
+
+function repeatCharacter(character, count) {
+    // Add your code below this line
+    let result = "";
+
+    // Append the character count times
+    for (let i = 0; i < count; i++) {
+        result += character;
+    }
+
+    // Return the final repeated string
+    return result;
+}
+
+
+var output = repeatCharacter(character, count);
+console.log(output);
