@@ -1,0 +1,21 @@
+Write a JavaScript function named checkOddEven that takes a number as a parameter and logs whether the number is odd or even to the console.
+
+Requirements:
+
+Define a function named checkOddEven that takes a parameter number. 
+
+Log the result to the console.Your goal is to implement the checkOddEven function and test it with different numbers.
+*********************************************Program***************************************************************************************************************************
+function checkOddEven(number) {
+  if (number % 2 === 0) {
+    console.log(`${number} is even.`);
+  } else {
+    console.log(`${number} is odd.`);
+  }
+}
+
+// Testing the function
+checkOddEven(5);  // Expected: 5 is odd.
+checkOddEven(10); // Expected: 10 is even.
+checkOddEven(7);  // Expected: 7 is odd.
+checkOddEven(2);  // Expected: 2 is even.
